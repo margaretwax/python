@@ -10,18 +10,18 @@ def is_alert_present(wd):
     except:
         return False
 
-class unittest oorraa login(unittest.TestCase):
+class login(unittest.TestCase):
     def setUp(self):
         self.wd = WebDriver()
         self.wd.implicitly_wait(60)
     
-    def test_unittest oorraa login(self):
+    def test_login(self):
         success = True
         wd = self.wd
         wd.get("https://front1.test.oorraa.net/")
         wd.find_element_by_link_text("Login").click()
         wd.find_element_by_link_text("Login").click()
-        wd.find_element_by_xpath("//section[@class='layout__auth']//label[.='Cell phone']").click()
+        wd.find_element_by_xpath("//label[@for='rs_loginWith_phone']/span/span").click()
         if not wd.find_element_by_id("rs_loginWith_phone").is_selected():
             wd.find_element_by_id("rs_loginWith_phone").click()
         wd.find_element_by_name("phone").click()
