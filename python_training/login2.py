@@ -10,17 +10,17 @@ def is_alert_present(wd):
     except:
         return False
 
-class login(unittest.TestCase):
+class login2(unittest.TestCase):
     def setUp(self):
         self.wd = WebDriver()
         self.wd.implicitly_wait(60)
     
-    def test_login(self):
+    def test_login2(self):
         success = True
         wd = self.wd
         wd.get("https://front1.test.oorraa.net/")
-        wd.find_element_by_link_text("Login").click()
-        wd.find_element_by_link_text("Login").click()
+        wd.find_element_by_link_text("Регистрация и вход").click()
+        wd.find_element_by_link_text("Вход").click()
         wd.find_element_by_xpath("//label[@for='rs_loginWith_phone']/span/span").click()
         if not wd.find_element_by_id("rs_loginWith_phone").is_selected():
             wd.find_element_by_id("rs_loginWith_phone").click()
@@ -30,7 +30,7 @@ class login(unittest.TestCase):
         wd.find_element_by_name("password").click()
         wd.find_element_by_name("password").clear()
         wd.find_element_by_name("password").send_keys("123")
-        wd.find_element_by_xpath("//section[@class='layout__auth']//button[.='Sign in']").click()
+        wd.find_element_by_xpath("//section[@class='layout__auth']//button[.='Войти']").click()
         self.assertTrue(success)
     
     def tearDown(self):
