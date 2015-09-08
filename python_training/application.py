@@ -14,19 +14,19 @@ class Application:
 
         def parameters_of_the_good(self, group):
             # parameters of the good
-            wd = self.wd
-            wd.find_element_by_id("gab_x").click()
-            wd.find_element_by_id("gab_x").clear()
-            wd.find_element_by_id("gab_x").send_keys(group.length)
-            wd.find_element_by_id("gab_y").click()
-            wd.find_element_by_id("gab_y").clear()
-            wd.find_element_by_id("gab_y").send_keys(group.width)
-            wd.find_element_by_id("gab_z").click()
-            wd.find_element_by_id("gab_z").clear()
-            wd.find_element_by_id("gab_z").send_keys(group.height)
-            wd.find_element_by_id("weight").click()
-            wd.find_element_by_id("weight").clear()
-            wd.find_element_by_id("weight").send_keys(group.weight)
+            find_id = self.wd.find_element_by_id
+
+            params = (
+                (find_id('gab_x'), group.length),
+                (find_id('gab_y'), group.width),
+                (find_id('gab_z'), group.height),
+                (find_id('weight'), group.weight)
+            )
+
+            for o, value in params:
+                o.click()
+                o.clear()
+                o.send_keys(value)
 
         def from_and_to_the_city(self, from_city_name, to_city_name):
             # from and to the city

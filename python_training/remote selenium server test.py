@@ -1,5 +1,5 @@
-__author__ = 'm.voskresenskaya'
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -8,10 +8,23 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 
+
 class Untitled(unittest.TestCase):
     def setUp(self):
         sauce_url = "http://ondemand.saucelabs.com/wd/hub"
-        self.driver = webdriver.Remote("http://mvoskresenskaya:71e1e9c5-2182-402c-85a6-8ebbac74aa61@ondemand.saucelabs.com/wd/hub", webdriver.DesiredCapabilities.FIREFOX)
+        grid_url = "http://mvoskresenskaya:71e1e9c5-2182-402c-85a6-8ebbac74aa61@ondemand.saucelabs.com/wd/hub"
+
+        caps = dict(
+            platform='WINDOWS',
+            browserName='chrome',
+            javascriptEnabled=True
+        )
+
+        self.driver = webdriver.Remote(
+            desired_capabilities=caps,
+            command_executor=grid_url
+        )
+
         self.driver.implicitly_wait(60)
         self.base_url = "http://delivery.oorraa.com/"
         self.verificationErrors = []
@@ -22,12 +35,12 @@ class Untitled(unittest.TestCase):
         driver.get(self.base_url)
         driver.find_element_by_id("from_city_name").click()
         driver.find_element_by_id("from_city_name").clear()
-        driver.find_element_by_id("from_city_name").send_keys(u"Москва")
-        driver.find_element_by_link_text(u"Москва, г. Москва").click()
+        driver.find_element_by_id("from_city_name").send_keys("Москва")
+        driver.find_element_by_link_text("Москва, г. Москва").click()
         driver.find_element_by_id("to_city_name").click()
         driver.find_element_by_id("to_city_name").clear()
-        driver.find_element_by_id("to_city_name").send_keys(u"Санкт-Петербург")
-        driver.find_element_by_link_text(u"Санкт-Петербург, г. Санкт-Петербург").click()
+        driver.find_element_by_id("to_city_name").send_keys("Санкт-Петербург")
+        driver.find_element_by_link_text("Санкт-Петербург, г. Санкт-Петербург").click()
         driver.find_element_by_id("gab_x").click()
         driver.find_element_by_id("gab_x").clear()
         driver.find_element_by_id("gab_x").send_keys("12")
