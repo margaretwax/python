@@ -30,16 +30,31 @@ class Application:
 
         def from_and_to_the_city(self, from_city_name, to_city_name):
             # from and to the city
+            find_id = self.wd.find_element_by_id
+            find_link_text = self.wd.find_element_by_link_text
             wd = self.wd
             self.open_home_page()
-            wd.find_element_by_id("from_city_name").click()
-            wd.find_element_by_id("from_city_name").clear()
-            wd.find_element_by_id("from_city_name").send_keys(from_city_name)
-            wd.find_element_by_link_text(u"Москва, г. Москва").click()
-            wd.find_element_by_id("to_city_name").click()
-            wd.find_element_by_id("to_city_name").clear()
-            wd.find_element_by_id("to_city_name").send_keys(to_city_name)
-            wd.find_element_by_link_text(u"Санкт-Петербург, г. Санкт-Петербург").click()
+
+            params = (
+                ('from_city_name', from_city_name, 'Москва, г. Москва'),
+                ('to_city_name', to_city_name, 'Санкт-Петербург, г. Санкт-Петербург')
+            )
+
+            for el_id, value, text in params:
+                el = find_id(el_id)
+                el.click()
+                el.clear()
+                el.send_keys(value)
+                find_link_text(text).click()
+
+            '''find_id("from_city_name").click()
+            find_id("from_city_name").clear()
+            find_id("from_city_name").send_keys(from_city_name)
+            find_link_text(u"Москва, г. Москва").click()
+            find_id("to_city_name").click()
+            find_id("to_city_name").clear()
+            find_id("to_city_name").send_keys(to_city_name)
+            find_link_text(u"Санкт-Петербург, г. Санкт-Петербург").click()'''
 
         def press_submit_button(self):
             # submit button

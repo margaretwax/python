@@ -1,0 +1,32 @@
+__author__ = 'm.voskresenskaya'
+# -*- coding: utf-8 -*-
+import os.path
+from selenium import webdriver
+import unittest
+
+
+class iostest(unittest.TestCase):
+    def setUp(self):
+        desired_caps = {}
+        desired_caps['appium-version'] = '1.0'
+        desired_caps['platformName'] = 'iOS'
+        desired_caps['platformVersion'] = '8.4'
+        desired_caps['deviceName'] = 'iPhone 6'
+        desired_caps['app'] = os.path.abspath('/Users/m.voskresenskaya/Desktop/Oorraa-sellerDev.app')
+
+        self.driver = webdriver.Remote('http://0.0.0.0:4723/wd/hub', desired_caps)
+        self.driver.implicitly_wait(4)
+
+    def test_ios(self):
+        find_name = self.driver.find_element_by_name
+
+        params = [find_name("OK"),
+                  find_name("Next"),
+                  find_name("Start")]
+
+        for el_id in params:
+            el = find_name(el_id)
+            el.click()
+
+    def tearDown(self):
+        self.driver.quit()
